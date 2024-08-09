@@ -1,0 +1,30 @@
+@page "/conteudo-parcial"
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+@using Microsoft.AspNetCore.Authorization
+@using System.Security.Claims
+
+<h3>Conteúdo Parcialmente Visível</h3>
+
+<!-- Parte pública do conteúdo -->
+<p>Esta parte do conteúdo é visível para todos os usuários.</p>
+
+<!-- Parte secreta do conteúdo -->
+@if (user.Identity.IsAuthenticated)
+{
+    <p>Esta parte do conteúdo é secreta e visível apenas para usuários autenticados.</p>
+}
+else
+{
+    <p><em>Você deve estar logado para ver o restante do conteúdo.</em></p>
+}
+
+@code {
+    private ClaimsPrincipal user;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        user = authState.User;
+    }
+}

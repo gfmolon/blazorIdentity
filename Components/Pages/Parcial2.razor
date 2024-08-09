@@ -1,0 +1,16 @@
+@page "/conteudo-parcial-2"
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@using Microsoft.AspNetCore.Authorization
+
+<PageTitle>Auth</PageTitle>
+
+<h1>Parcial 2</h1>
+
+<p>Todos veeem</p>
+
+<AuthorizeView>
+
+    <Authorized> Hello @context.User.Identity?.Name!</Authorized>
+    <NotAuthorized>So nao autorizado Ve.</NotAuthorized>
+
+</AuthorizeView>
